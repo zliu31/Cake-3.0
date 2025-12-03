@@ -3,7 +3,8 @@ const appState = {
     currentScreen: 1,
     selectedBase: null,
     selectedFrosting: null,
-    strawberryPlaced: false
+    strawberryPlaced: false,
+    strawberryPosition: { x: 0, y: 0 }
 };
 
 // Image URLs for final cake composition
@@ -36,23 +37,38 @@ function initializeApp() {
 
 // Screen Navigation
 function showScreen(screenNumber) {
-    // Hide all screens
-    const screens = document.querySelectorAll('.screen');
-    screens.forEach(screen => {
-        screen.classList.remove('active');
-    });
-    
-    // Show target screen
+    const currentActiveScreen = document.querySelector('.screen.active');
     const targetScreen = document.querySelector(`[data-screen="${screenNumber}"]`);
-    if (targetScreen) {
-        targetScreen.classList.add('active');
-        targetScreen.classList.add('fade-in');
-        appState.currentScreen = screenNumber;
-        
-        // If showing final screen, render the cake
-        if (screenNumber === 4) {
-            renderFinalCake();
-        }
+
+    if (!targetScreen) return;
+
+    // Fade out current screen
+    if (currentActiveScreen) {
+        currentActiveScreen.style.opacity = '0';
+
+        setTimeout(() => {
+            currentActiveScreen.classList.remove('active');
+            currentActiveScreen.style.display = 'none';
+
+            // Fade in new screen
+            targetScreen.style.display = 'block';
+            setTimeout(() => {
+                targetScreen.classList.add('active');
+                appState.currentScreen = screenNumber;
+
+                // If showing final screen, render the cake
+                if (screenNumber === 4) {
+                    renderFinalCake();
+                }
+            }, 50);
+        }, 500);
+    } else {
+        // First screen load
+        targetScreen.style.display = 'block';
+        setTimeout(() => {
+            targetScreen.classList.add('active');
+            appState.currentScreen = screenNumber;
+        }, 50);
     }
 }
 
@@ -111,25 +127,28 @@ function selectFrosting(frostingType) {
 function setupStrawberryDrag() {
     const strawberry = document.getElementById('strawberry');
     if (!strawberry) return;
-    
+
     let isDragging = false;
-    let currentX;
-    let currentY;
-    let initialX;
-    let initialY;
+    let currentX = 0;
+    let currentY = 0;
+    let initialX = 0;
+    let initialY = 0;
     let xOffset = 0;
     let yOffset = 0;
-    
+
+    // Mouse events
     strawberry.addEventListener('mousedown', dragStart);
-    strawberry.addEventListener('touchstart', dragStart);
-    
     document.addEventListener('mousemove', drag);
-    document.addEventListener('touchmove', drag);
-    
     document.addEventListener('mouseup', dragEnd);
+
+    // Touch events
+    strawberry.addEventListener('touchstart', dragStart, { passive: false });
+    document.addEventListener('touchmove', drag, { passive: false });
     document.addEventListener('touchend', dragEnd);
-    
+
     function dragStart(e) {
+        const strawberryRect = strawberry.getBoundingClientRect();
+
         if (e.type === 'touchstart') {
             initialX = e.touches[0].clientX - xOffset;
             initialY = e.touches[0].clientY - yOffset;
@@ -137,16 +156,17 @@ function setupStrawberryDrag() {
             initialX = e.clientX - xOffset;
             initialY = e.clientY - yOffset;
         }
-        
+
         if (e.target === strawberry) {
             isDragging = true;
+            strawberry.style.cursor = 'grabbing';
         }
     }
-    
+
     function drag(e) {
         if (isDragging) {
             e.preventDefault();
-            
+
             if (e.type === 'touchmove') {
                 currentX = e.touches[0].clientX - initialX;
                 currentY = e.touches[0].clientY - initialY;
@@ -154,23 +174,29 @@ function setupStrawberryDrag() {
                 currentX = e.clientX - initialX;
                 currentY = e.clientY - initialY;
             }
-            
+
             xOffset = currentX;
             yOffset = currentY;
-            
+
             setTranslate(currentX, currentY, strawberry);
             appState.strawberryPlaced = true;
+
+            // Store position for final screen
+            appState.strawberryPosition = { x: currentX, y: currentY };
         }
     }
-    
+
     function dragEnd(e) {
-        initialX = currentX;
-        initialY = currentY;
-        isDragging = false;
+        if (isDragging) {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+            strawberry.style.cursor = 'grab';
+        }
     }
-    
+
     function setTranslate(xPos, yPos, el) {
-        el.style.transform = `translate(${xPos}px, ${yPos}px) rotate(334deg)`;
+        el.style.transform = `translate(calc(-50% + ${xPos}px), calc(-50% + ${yPos}px)) rotate(334deg)`;
     }
 }
 
@@ -216,21 +242,23 @@ function restartApp() {
     appState.selectedBase = null;
     appState.selectedFrosting = null;
     appState.strawberryPlaced = false;
-    
+    appState.strawberryPosition = { x: 0, y: 0 };
+
     // Reset strawberry position
     const strawberry = document.getElementById('strawberry');
     if (strawberry) {
-        strawberry.style.transform = 'translate(-50%, -50%) rotate(334deg)';
+        strawberry.style.transform = 'translate(calc(-50% + 0px), calc(-50% + 0px)) rotate(334deg)';
+        strawberry.style.cursor = 'grab';
     }
-    
+
     // Clear selections
     document.querySelectorAll('.base-item, .frosting-item').forEach(item => {
         item.classList.remove('selected');
     });
-    
+
     // Go back to first screen
     showScreen(1);
-    
+
     console.log('App restarted');
 }
 
