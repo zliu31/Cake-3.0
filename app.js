@@ -4,7 +4,7 @@ const appState = {
     selectedBase: null,
     selectedFrosting: null,
     strawberryPlaced: false,
-    strawberryPosition: { x: 0, y: 0 }
+    strawberryPosition: { x: 888, y: 224.8 } // Initial Figma position
 };
 
 // Image URLs for final cake composition
@@ -31,44 +31,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
-    console.log('Cake Customization App Initialized');
+    console.log('Cake Customization App Initialized - Exact Figma Positions');
     showScreen(1);
 }
 
 // Screen Navigation
 function showScreen(screenNumber) {
-    const currentActiveScreen = document.querySelector('.screen.active');
+    // Hide all screens
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(screen => {
+        screen.classList.remove('active');
+    });
+    
+    // Show target screen
     const targetScreen = document.querySelector(`[data-screen="${screenNumber}"]`);
-
-    if (!targetScreen) return;
-
-    // Fade out current screen
-    if (currentActiveScreen) {
-        currentActiveScreen.style.opacity = '0';
-
-        setTimeout(() => {
-            currentActiveScreen.classList.remove('active');
-            currentActiveScreen.style.display = 'none';
-
-            // Fade in new screen
-            targetScreen.style.display = 'block';
-            setTimeout(() => {
-                targetScreen.classList.add('active');
-                appState.currentScreen = screenNumber;
-
-                // If showing final screen, render the cake
-                if (screenNumber === 4) {
-                    renderFinalCake();
-                }
-            }, 50);
-        }, 500);
-    } else {
-        // First screen load
-        targetScreen.style.display = 'block';
-        setTimeout(() => {
-            targetScreen.classList.add('active');
-            appState.currentScreen = screenNumber;
-        }, 50);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+        targetScreen.classList.add('fade-in');
+        appState.currentScreen = screenNumber;
+        
+        // If showing final screen, render the cake
+        if (screenNumber === 4) {
+            renderFinalCake();
+        }
     }
 }
 
@@ -123,50 +108,45 @@ function selectFrosting(frostingType) {
     console.log('Selected frosting:', frostingType);
 }
 
-// Strawberry Drag and Drop
+// Strawberry Drag and Drop with Exact Position Tracking
 function setupStrawberryDrag() {
     const strawberry = document.getElementById('strawberry');
     if (!strawberry) return;
-
+    
     let isDragging = false;
-    let currentX = 0;
-    let currentY = 0;
-    let initialX = 0;
-    let initialY = 0;
-    let xOffset = 0;
-    let yOffset = 0;
-
-    // Mouse events
+    let currentX = 888; // Initial X from Figma
+    let currentY = 224.8; // Initial Y from Figma
+    let initialX;
+    let initialY;
+    
     strawberry.addEventListener('mousedown', dragStart);
+    strawberry.addEventListener('touchstart', dragStart);
+    
     document.addEventListener('mousemove', drag);
+    document.addEventListener('touchmove', drag);
+    
     document.addEventListener('mouseup', dragEnd);
-
-    // Touch events
-    strawberry.addEventListener('touchstart', dragStart, { passive: false });
-    document.addEventListener('touchmove', drag, { passive: false });
     document.addEventListener('touchend', dragEnd);
-
+    
     function dragStart(e) {
-        const strawberryRect = strawberry.getBoundingClientRect();
-
         if (e.type === 'touchstart') {
-            initialX = e.touches[0].clientX - xOffset;
-            initialY = e.touches[0].clientY - yOffset;
+            initialX = e.touches[0].clientX - currentX;
+            initialY = e.touches[0].clientY - currentY;
         } else {
-            initialX = e.clientX - xOffset;
-            initialY = e.clientY - yOffset;
+            initialX = e.clientX - currentX;
+            initialY = e.clientY - currentY;
         }
-
+        
         if (e.target === strawberry) {
             isDragging = true;
             strawberry.style.cursor = 'grabbing';
         }
     }
-
+    
     function drag(e) {
         if (isDragging) {
             e.preventDefault();
-
+            
             if (e.type === 'touchmove') {
                 currentX = e.touches[0].clientX - initialX;
                 currentY = e.touches[0].clientY - initialY;
@@ -174,29 +154,27 @@ function setupStrawberryDrag() {
                 currentX = e.clientX - initialX;
                 currentY = e.clientY - initialY;
             }
-
-            xOffset = currentX;
-            yOffset = currentY;
-
-            setTranslate(currentX, currentY, strawberry);
+            
+            // Keep within screen bounds (1512x863)
+            currentX = Math.max(0, Math.min(currentX, 1512 - 257));
+            currentY = Math.max(0, Math.min(currentY, 863 - 257));
+            
+            setPosition(currentX, currentY, strawberry);
             appState.strawberryPlaced = true;
-
-            // Store position for final screen
             appState.strawberryPosition = { x: currentX, y: currentY };
         }
     }
-
+    
     function dragEnd(e) {
-        if (isDragging) {
-            initialX = currentX;
-            initialY = currentY;
-            isDragging = false;
-            strawberry.style.cursor = 'grab';
-        }
+        isDragging = false;
+        strawberry.style.cursor = 'grab';
+        console.log('Strawberry position:', appState.strawberryPosition);
     }
-
-    function setTranslate(xPos, yPos, el) {
-        el.style.transform = `translate(calc(-50% + ${xPos}px), calc(-50% + ${yPos}px)) rotate(334deg)`;
+    
+    function setPosition(xPos, yPos, el) {
+        // Use exact pixel positioning
+        el.style.left = xPos + 'px';
+        el.style.top = yPos + 'px';
     }
 }
 
@@ -242,24 +220,24 @@ function restartApp() {
     appState.selectedBase = null;
     appState.selectedFrosting = null;
     appState.strawberryPlaced = false;
-    appState.strawberryPosition = { x: 0, y: 0 };
-
-    // Reset strawberry position
+    appState.strawberryPosition = { x: 888, y: 224.8 };
+    
+    // Reset strawberry position to original Figma coordinates
     const strawberry = document.getElementById('strawberry');
     if (strawberry) {
-        strawberry.style.transform = 'translate(calc(-50% + 0px), calc(-50% + 0px)) rotate(334deg)';
-        strawberry.style.cursor = 'grab';
+        strawberry.style.left = '888px';
+        strawberry.style.top = '224.8px';
     }
-
+    
     // Clear selections
     document.querySelectorAll('.base-item, .frosting-item').forEach(item => {
         item.classList.remove('selected');
     });
-
+    
     // Go back to first screen
     showScreen(1);
-
-    console.log('App restarted');
+    
+    console.log('App restarted - Reset to Figma positions');
 }
 
 // Export state for Java integration (if needed)
@@ -275,4 +253,5 @@ function setAppState(stateJson) {
 // Debug helper
 function debugState() {
     console.log('Current App State:', appState);
+    console.log('Strawberry Position:', appState.strawberryPosition);
 }
