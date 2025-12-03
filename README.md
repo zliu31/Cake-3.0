@@ -2,6 +2,17 @@
 
 An interactive web application for customizing cakes with different base flavors, frosting colors, and toppings. Built with Java Spring Boot, HTML, CSS, and JavaScript.
 
+## 🚀 Quick Deploy (Make Public)
+
+Want to make this website public? Choose your preferred option:
+
+- **🌟 Fastest:** [GitHub Pages](QUICKSTART_DEPLOY.md#-option-1-github-pages-easiest---2-minutes) - 2 minutes
+- **⚡ Recommended:** [Netlify](QUICKSTART_DEPLOY.md#-option-2-netlify-recommended---3-minutes) - 3 minutes, better performance
+- **🎯 Alternative:** [Vercel](QUICKSTART_DEPLOY.md#-option-3-vercel-fast---3-minutes) - 3 minutes, excellent CDN
+
+📖 **See [QUICKSTART_DEPLOY.md](QUICKSTART_DEPLOY.md) for step-by-step instructions**
+📚 **Full deployment guide:** [DEPLOYMENT.md](DEPLOYMENT.md)
+
 ## Features
 
 - **Step 1**: Choose from 3 base flavors (Matcha, Vanilla, Red Velvet)

@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+.github
+
+# Maven
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# Documentation
+*.md
+DEPLOYMENT.md
+SETUP_GUIDE.md
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+src/test/
+
+# Temporary files
+*.tmp
+*.swp
+*~
