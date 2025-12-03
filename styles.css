@@ -1,0 +1,332 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lemon', sans-serif;
+    overflow: hidden;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Screen Management */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: block;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Typography */
+.step-title {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Leckerli One', cursive;
+    font-size: 100px;
+    color: white;
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    white-space: pre-wrap;
+    width: 90%;
+    max-width: 1449px;
+    z-index: 10;
+}
+
+.step3-title {
+    top: 470px;
+}
+
+.final-title {
+    top: 700px;
+}
+
+/* Next Button */
+.next-button {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    color: #ff5f9f;
+    font-family: 'Lemon', sans-serif;
+    font-size: 45px;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 45px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.next-button:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.next-button:active {
+    transform: translateX(-50%) scale(0.98);
+}
+
+/* Screen 1: Base Flavor Selection */
+.base-options {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 90%;
+    max-width: 1600px;
+}
+
+.base-item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: brightness(0.9);
+}
+
+.base-item:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.base-item.selected {
+    transform: scale(1.15);
+    filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+}
+
+.base-item img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    object-fit: contain;
+}
+
+/* Screen 2: Frosting Selection */
+.frosting-options {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 90%;
+    max-width: 1600px;
+}
+
+.frosting-item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: brightness(0.9);
+}
+
+.frosting-item:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.frosting-item.selected {
+    transform: scale(1.15);
+    filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+}
+
+.frosting-item img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    object-fit: contain;
+}
+
+/* Screen 3: Strawberry Placement */
+.strawberry-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 500px;
+}
+
+.strawberry {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(334deg);
+    width: 257px;
+    height: 257px;
+    cursor: grab;
+    transition: transform 0.1s ease;
+    z-index: 20;
+}
+
+.strawberry:active {
+    cursor: grabbing;
+}
+
+.hand-cursor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 445px;
+    height: 291px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Screen 4: Final Cake Display */
+.cake-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 671px;
+    height: 651px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.final-cake-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.final-cake-base {
+    width: 400px;
+    height: auto;
+    margin-bottom: -150px;
+    z-index: 1;
+}
+
+.final-cake-frosting {
+    width: 350px;
+    height: auto;
+    margin-bottom: -100px;
+    z-index: 2;
+}
+
+.final-cake-strawberry {
+    width: 150px;
+    height: auto;
+    z-index: 3;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .step-title {
+        font-size: 70px;
+    }
+    
+    .next-button {
+        font-size: 35px;
+    }
+    
+    .base-item img,
+    .frosting-item img {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .step-title {
+        font-size: 50px;
+    }
+    
+    .next-button {
+        font-size: 28px;
+        padding: 15px 30px;
+    }
+    
+    .base-options,
+    .frosting-options {
+        flex-direction: column;
+    }
+    
+    .base-item img,
+    .frosting-item img {
+        max-width: 250px;
+    }
+    
+    .strawberry-container {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .cake-display {
+        width: 90%;
+        height: 70%;
+    }
+}
+
+/* Loading Animation */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
