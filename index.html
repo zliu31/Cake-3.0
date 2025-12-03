@@ -3,84 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cake Customization</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Cake 3.0 - Custom Cake Designer</title>
     <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&family=Lemon&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lemon', cursive;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Leckerli One', cursive;
+            font-size: 4rem;
+            color: #ff5f9f;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .feature {
+            background: #fff8f0;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #ffd6e7;
+        }
+
+        .feature h3 {
+            color: #ff5f9f;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 0.9rem;
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            font-family: 'Lemon', cursive;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f8ff;
+            border-radius: 15px;
+            font-family: Arial, sans-serif;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 40px 25px;
+            }
+
+            .cta-button {
+                padding: 15px 35px;
+                font-size: 1.2rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Screen 1: Choose Base Flavor -->
-    <div id="screen1" class="screen active" data-screen="1">
-        <img src="https://www.figma.com/api/mcp/asset/80ddc3f3-08e5-4c5e-a956-50a1e73bef0d" class="background" alt="background">
-        <h1 class="step-title">Step 1: Choose Your Base Flavor</h1>
-        
-        <div class="base-options">
-            <div class="base-item" onclick="selectBase('matcha')" data-base="matcha">
-                <img src="https://www.figma.com/api/mcp/asset/f229291e-9a84-4f0e-9ad1-552e5820b78c" alt="Matcha Base">
+    <div class="container">
+        <span class="emoji">🍰</span>
+        <h1>Cake 3.0</h1>
+        <p class="subtitle">Design Your Perfect Custom Cake!</p>
+
+        <div class="features">
+            <div class="feature">
+                <h3>🎨 Step 1</h3>
+                <p>Choose from 3 delicious base flavors: Matcha, Vanilla, or Red Velvet</p>
             </div>
-            <div class="base-item" onclick="selectBase('vanilla')" data-base="vanilla">
-                <img src="https://www.figma.com/api/mcp/asset/73586ded-d9d8-434e-a216-5ac98450f012" alt="Vanilla Base">
+            <div class="feature">
+                <h3>🌈 Step 2</h3>
+                <p>Select your frosting color from 5 beautiful options</p>
             </div>
-            <div class="base-item" onclick="selectBase('red')" data-base="red">
-                <img src="https://www.figma.com/api/mcp/asset/64eaa625-a97b-4515-b28d-9b493057049e" alt="Red Base">
+            <div class="feature">
+                <h3>🍓 Step 3</h3>
+                <p>Drag and drop a strawberry on top for the perfect finish</p>
+            </div>
+            <div class="feature">
+                <h3>✨ Step 4</h3>
+                <p>View your beautiful custom-designed cake!</p>
             </div>
         </div>
-        
-        <button class="next-button" onclick="nextScreen(2)">Next</button>
-    </div>
 
-    <!-- Screen 2: Choose Frosting Color -->
-    <div id="screen2" class="screen" data-screen="2">
-        <img src="https://www.figma.com/api/mcp/asset/12a6423b-ea94-4337-b927-be9d25c5d4fe" class="background" alt="background">
-        <h1 class="step-title">Step 2: Choose Frosting Color</h1>
-        
-        <div class="frosting-options">
-            <div class="frosting-item" onclick="selectFrosting('white')" data-frosting="white">
-                <img src="https://www.figma.com/api/mcp/asset/72393f20-5534-401e-8e61-e7b46a73e2e2" alt="White Frosting">
-            </div>
-            <div class="frosting-item" onclick="selectFrosting('pink')" data-frosting="pink">
-                <img src="https://www.figma.com/api/mcp/asset/748e3467-1728-4cc1-b6b0-879417843375" alt="Pink Frosting">
-            </div>
-            <div class="frosting-item" onclick="selectFrosting('brown')" data-frosting="brown">
-                <img src="https://www.figma.com/api/mcp/asset/8df9f123-6ed6-4e7f-8d44-f648956332d9" alt="Brown Frosting">
-            </div>
-            <div class="frosting-item" onclick="selectFrosting('purple')" data-frosting="purple">
-                <img src="https://www.figma.com/api/mcp/asset/0ed839de-9388-4960-8cfa-69e6da22f69f" alt="Purple Frosting">
-            </div>
-            <div class="frosting-item" onclick="selectFrosting('yellow')" data-frosting="yellow">
-                <img src="https://www.figma.com/api/mcp/asset/ba283fc0-4cc4-4187-bbc5-8a852db282fe" alt="Yellow Frosting">
-            </div>
+        <a href="app.html" class="cta-button">Start Designing →</a>
+
+        <div class="info">
+            <strong>💡 Features:</strong> Fully interactive • Drag & drop • Smooth animations • Mobile responsive • Beautiful design
         </div>
-        
-        <button class="next-button" onclick="nextScreen(3)">Next</button>
     </div>
 
-    <!-- Screen 3: Place Strawberry -->
-    <div id="screen3" class="screen" data-screen="3">
-        <img src="https://www.figma.com/api/mcp/asset/c9cf26c2-d4fd-4eec-94f8-53f8e6e52be4" class="background" alt="background">
-        <h1 class="step-title step3-title">Step 3: Place Your Strawberry On Top!</h1>
-        
-        <div class="strawberry-container">
-            <img src="https://www.figma.com/api/mcp/asset/19d2de6f-016f-487b-a57c-8d9ddef576d8" class="hand-cursor" alt="Hand">
-            <img src="https://www.figma.com/api/mcp/asset/60c52e39-874f-48df-abaa-4af3aa446d2a" class="strawberry draggable" id="strawberry" alt="Strawberry" draggable="true">
-        </div>
-        
-        <button class="next-button" onclick="nextScreen(4)">Next</button>
-    </div>
-
-    <!-- Screen 4: Final Result -->
-    <div id="screen4" class="screen" data-screen="4">
-        <img src="https://www.figma.com/api/mcp/asset/b38c4b1d-5904-4907-86df-512ee8e10d56" class="background" alt="background">
-        <h1 class="step-title final-title">Your Cake is Ready!</h1>
-        
-        <div class="cake-display">
-            <div id="finalCake" class="final-cake-container">
-                <!-- Final cake will be rendered here -->
-            </div>
-        </div>
-        
-        <button class="next-button" onclick="restartApp()">Start Over</button>
-    </div>
-
-    <script src="app.js"></script>
+    <script>
+        // Preload the app for faster loading
+        setTimeout(() => {
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = 'app.html';
+            document.head.appendChild(link);
+        }, 100);
+    </script>
 </body>
 </html>
