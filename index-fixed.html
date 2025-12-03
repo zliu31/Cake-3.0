@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cake Customization</title>
+    <link rel="stylesheet" href="styles-fixed.css">
+    <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&family=Lemon&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Screen 1: Choose Base Flavor - Frame 1:2 -->
+    <div id="screen1" class="screen active" data-screen="1">
+        <!-- Background -->
+        <img src="https://www.figma.com/api/mcp/asset/80ddc3f3-08e5-4c5e-a956-50a1e73bef0d" class="background" alt="background">
+        
+        <!-- Step Title -->
+        <h1 class="step-title">Step 1: Choose Your Base Flavor</h1>
+        
+        <!-- Base Options -->
+        <div class="base-options">
+            <!-- Matcha Base: x=-12, y=307, w=529, h=495 -->
+            <div class="base-item" onclick="selectBase('matcha')" data-base="matcha">
+                <img src="https://www.figma.com/api/mcp/asset/f229291e-9a84-4f0e-9ad1-552e5820b78c" alt="Matcha Base">
+            </div>
+            
+            <!-- Vanilla Base: x=517, y=279, w=478, h=477 -->
+            <div class="base-item" onclick="selectBase('vanilla')" data-base="vanilla">
+                <img src="https://www.figma.com/api/mcp/asset/73586ded-d9d8-434e-a216-5ac98450f012" alt="Vanilla Base">
+            </div>
+            
+            <!-- Red Base: x=995, y=321, w=538, h=506 -->
+            <div class="base-item" onclick="selectBase('red')" data-base="red">
+                <img src="https://www.figma.com/api/mcp/asset/64eaa625-a97b-4515-b28d-9b493057049e" alt="Red Base">
+            </div>
+        </div>
+        
+        <!-- Next Button: x=624, y=742, w=264, h=90 -->
+        <button class="next-button" onclick="nextScreen(2)">Next</button>
+    </div>
+
+    <!-- Screen 2: Choose Frosting Color - Frame 3:4 -->
+    <div id="screen2" class="screen" data-screen="2">
+        <!-- Background -->
+        <img src="https://www.figma.com/api/mcp/asset/12a6423b-ea94-4337-b927-be9d25c5d4fe" class="background" alt="background">
+        
+        <!-- Step Title -->
+        <h1 class="step-title">Step 2: Choose Frosting Color</h1>
+        
+        <!-- Frosting Options -->
+        <div class="frosting-options">
+            <!-- White Frosting: x=-20, y=156, w=461, h=484 -->
+            <div class="frosting-item" onclick="selectFrosting('white')" data-frosting="white">
+                <img src="https://www.figma.com/api/mcp/asset/72393f20-5534-401e-8e61-e7b46a73e2e2" alt="White Frosting">
+            </div>
+            
+            <!-- Pink Frosting: x=448, y=219, w=229, h=438 -->
+            <div class="frosting-item" onclick="selectFrosting('pink')" data-frosting="pink">
+                <img src="https://www.figma.com/api/mcp/asset/748e3467-1728-4cc1-b6b0-879417843375" alt="Pink Frosting">
+            </div>
+            
+            <!-- Brown Frosting: x=638, y=253, w=308, h=431 -->
+            <div class="frosting-item" onclick="selectFrosting('brown')" data-frosting="brown">
+                <img src="https://www.figma.com/api/mcp/asset/8df9f123-6ed6-4e7f-8d44-f648956332d9" alt="Brown Frosting">
+            </div>
+            
+            <!-- Purple Frosting: x=830, y=290, w=379, h=437 -->
+            <div class="frosting-item" onclick="selectFrosting('purple')" data-frosting="purple">
+                <img src="https://www.figma.com/api/mcp/asset/0ed839de-9388-4960-8cfa-69e6da22f69f" alt="Purple Frosting">
+            </div>
+            
+            <!-- Yellow Frosting: x=1020, y=352, w=471, h=413 -->
+            <div class="frosting-item" onclick="selectFrosting('yellow')" data-frosting="yellow">
+                <img src="https://www.figma.com/api/mcp/asset/ba283fc0-4cc4-4187-bbc5-8a852db282fe" alt="Yellow Frosting">
+            </div>
+        </div>
+        
+        <!-- Next Button: x=624, y=742, w=264, h=90 -->
+        <button class="next-button" onclick="nextScreen(3)">Next</button>
+    </div>
+
+    <!-- Screen 3: Place Strawberry - Frame 5:19 -->
+    <div id="screen3" class="screen" data-screen="3">
+        <!-- Background -->
+        <img src="https://www.figma.com/api/mcp/asset/c9cf26c2-d4fd-4eec-94f8-53f8e6e52be4" class="background" alt="background">
+        
+        <!-- Step Title -->
+        <h1 class="step-title">Step 3: Place Your Strawberry On Top!</h1>
+        
+        <!-- Strawberry Container -->
+        <div class="strawberry-container">
+            <!-- Hand Cursor: x=960, y=-4, w=444.999, h=290.528 -->
+            <img src="https://www.figma.com/api/mcp/asset/19d2de6f-016f-487b-a57c-8d9ddef576d8" class="hand-cursor" alt="Hand">
+            
+            <!-- Strawberry: x=888, y=224.8, w=257.056, h=257.056, rotation=334.186deg -->
+            <img src="https://www.figma.com/api/mcp/asset/60c52e39-874f-48df-abaa-4af3aa446d2a" class="strawberry" id="strawberry" alt="Strawberry" draggable="true">
+        </div>
+        
+        <!-- Next Button: x=639, y=742, w=264, h=90 -->
+        <button class="next-button" onclick="nextScreen(4)">Next</button>
+    </div>
+
+    <!-- Screen 4: Final Result - Frame 7:29 -->
+    <div id="screen4" class="screen" data-screen="4">
+        <!-- Background -->
+        <img src="https://www.figma.com/api/mcp/asset/b38c4b1d-5904-4907-86df-512ee8e10d56" class="background" alt="background">
+        
+        <!-- Step Title -->
+        <h1 class="step-title">Your Cake is Ready!</h1>
+        
+        <!-- Cake Display: x=435, y=47, w=671, h=651 -->
+        <div class="cake-display">
+            <div id="finalCake" class="final-cake-container">
+                <!-- Final cake will be rendered here -->
+            </div>
+        </div>
+        
+        <!-- Next Button: x=624, y=742, w=264, h=90 -->
+        <button class="next-button" onclick="restartApp()">Start Over</button>
+    </div>
+
+    <script src="app-fixed.js"></script>
+</body>
+</html>

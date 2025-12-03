@@ -1,0 +1,378 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lemon', sans-serif;
+    overflow: hidden;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Screen Management */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1512px;
+    height: 863px;
+    display: none;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: block;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Typography - Exact Figma Positions */
+.step-title {
+    position: absolute;
+    font-family: 'Leckerli One', cursive;
+    font-size: 100px;
+    color: white;
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    white-space: pre-wrap;
+    z-index: 10;
+    line-height: normal;
+    font-style: normal;
+}
+
+/* Screen 1 Title */
+#screen1 .step-title {
+    left: 31px;
+    top: 41px;
+    width: 1449px;
+    height: 252px;
+}
+
+/* Screen 2 Title */
+#screen2 .step-title {
+    left: 42px;
+    top: 38px;
+    width: 1449px;
+    height: 252px;
+}
+
+/* Screen 3 Title */
+#screen3 .step-title {
+    left: 31px;
+    top: 470px;
+    width: 1449px;
+    height: 252px;
+}
+
+/* Screen 4 Title */
+#screen4 .step-title {
+    left: 46px;
+    top: 699px;
+    width: 1449px;
+    height: 252px;
+}
+
+/* Next Button - Exact Figma Positions */
+.next-button {
+    position: absolute;
+    background-color: white;
+    color: #ff5f9f;
+    font-family: 'Lemon', sans-serif;
+    font-size: 45px;
+    border: none;
+    border-radius: 45px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    line-height: normal;
+    padding: 0;
+}
+
+#screen1 .next-button {
+    left: 624px;
+    top: 742px;
+    width: 264px;
+    height: 90px;
+}
+
+#screen2 .next-button {
+    left: 624px;
+    top: 742px;
+    width: 264px;
+    height: 90px;
+}
+
+#screen3 .next-button {
+    left: 639px;
+    top: 742px;
+    width: 264px;
+    height: 90px;
+}
+
+#screen4 .next-button {
+    left: 624px;
+    top: 742px;
+    width: 264px;
+    height: 90px;
+}
+
+.next-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.next-button:active {
+    transform: scale(0.98);
+}
+
+/* Screen 1: Base Flavor Selection - Exact Figma Positions */
+.base-options {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.base-item {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.base-item[data-base="matcha"] {
+    left: -12px;
+    top: 307px;
+    width: 529px;
+    height: 495px;
+}
+
+.base-item[data-base="vanilla"] {
+    left: 517px;
+    top: 279px;
+    width: 478px;
+    height: 477px;
+}
+
+.base-item[data-base="red"] {
+    left: 995px;
+    top: 321px;
+    width: 538px;
+    height: 506px;
+}
+
+.base-item:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+.base-item.selected {
+    filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+    transform: scale(1.03);
+}
+
+.base-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Screen 2: Frosting Selection - Exact Figma Positions */
+.frosting-options {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.frosting-item {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.frosting-item[data-frosting="white"] {
+    left: -20px;
+    top: 156px;
+    width: 461px;
+    height: 484px;
+}
+
+.frosting-item[data-frosting="pink"] {
+    left: 448px;
+    top: 219px;
+    width: 229px;
+    height: 438px;
+}
+
+.frosting-item[data-frosting="brown"] {
+    left: 638px;
+    top: 253px;
+    width: 308px;
+    height: 431px;
+}
+
+.frosting-item[data-frosting="purple"] {
+    left: 830px;
+    top: 290px;
+    width: 379px;
+    height: 437px;
+}
+
+.frosting-item[data-frosting="yellow"] {
+    left: 1020px;
+    top: 352px;
+    width: 471px;
+    height: 413px;
+}
+
+.frosting-item:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+.frosting-item.selected {
+    filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+    transform: scale(1.03);
+}
+
+.frosting-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Screen 3: Strawberry Placement - Exact Figma Positions */
+.strawberry-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.strawberry {
+    position: absolute;
+    left: 888px;
+    top: 224.8px;
+    width: 257.056px;
+    height: 257.056px;
+    cursor: grab;
+    z-index: 20;
+    transform: rotate(334.186deg);
+}
+
+.strawberry:active {
+    cursor: grabbing;
+}
+
+.hand-cursor {
+    position: absolute;
+    left: 960px;
+    top: -4px;
+    width: 444.999px;
+    height: 290.528px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Screen 4: Final Cake Display - Exact Figma Positions */
+.cake-display {
+    position: absolute;
+    left: 435px;
+    top: 47px;
+    width: 671px;
+    height: 651px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.final-cake-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.final-cake-base {
+    width: 400px;
+    height: auto;
+    margin-bottom: -150px;
+    z-index: 1;
+}
+
+.final-cake-frosting {
+    width: 350px;
+    height: auto;
+    margin-bottom: -100px;
+    z-index: 2;
+}
+
+.final-cake-strawberry {
+    width: 150px;
+    height: auto;
+    z-index: 3;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Loading Animation */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design - Only for very small screens */
+@media (max-width: 1512px) {
+    .screen {
+        transform: scale(0.8);
+        transform-origin: top left;
+    }
+}
+
+@media (max-width: 1200px) {
+    .screen {
+        transform: scale(0.6);
+        transform-origin: top left;
+    }
+}
+
+@media (max-width: 900px) {
+    .screen {
+        transform: scale(0.5);
+        transform-origin: top left;
+    }
+}
