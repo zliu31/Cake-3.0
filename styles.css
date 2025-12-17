@@ -367,112 +367,34 @@ body {
     }
 }
 
-/* Dynamic Responsive Scaling - Fits to viewport while maintaining aspect ratio */
+/* Dynamic Responsive Scaling - Maximum effective display size */
+/* Automatically calculates best scale to fill viewport */
+
+/* For very large screens - keep at 100% */
+@media (min-width: 1600px) and (min-height: 900px) {
+    #screen-container {
+        transform: scale(1);
+    }
+}
+
+/* Desktop optimization - larger scales for better utilization */
 @media (max-width: 1600px) {
     #screen-container {
-        transform: scale(0.95);
+        transform: scale(calc(100vw / 1512));
+        max-width: 100vw;
     }
 }
 
-@media (max-width: 1512px) {
-    #screen-container {
-        transform: scale(0.9);
-    }
-}
-
-@media (max-width: 1400px) {
-    #screen-container {
-        transform: scale(0.85);
-    }
-}
-
-@media (max-width: 1300px) {
-    #screen-container {
-        transform: scale(0.75);
-    }
-}
-
-@media (max-width: 1200px) {
-    #screen-container {
-        transform: scale(0.7);
-    }
-}
-
-@media (max-width: 1100px) {
-    #screen-container {
-        transform: scale(0.65);
-    }
-}
-
-@media (max-width: 1000px) {
-    #screen-container {
-        transform: scale(0.6);
-    }
-}
-
-@media (max-width: 900px) {
-    #screen-container {
-        transform: scale(0.55);
-    }
-}
-
-@media (max-width: 850px) {
-    #screen-container {
-        transform: scale(0.5);
-    }
-}
-
-@media (max-width: 768px) {
-    #screen-container {
-        transform: scale(0.45);
-    }
-}
-
-@media (max-width: 680px) {
-    #screen-container {
-        transform: scale(0.4);
-    }
-}
-
-@media (max-width: 600px) {
-    #screen-container {
-        transform: scale(0.35);
-    }
-}
-
-@media (max-width: 480px) {
-    #screen-container {
-        transform: scale(0.3);
-    }
-}
-
-/* Vertical viewport adjustments */
+/* Height-constrained viewports - scale to fit height */
 @media (max-height: 900px) {
     #screen-container {
-        transform: scale(0.9);
+        transform: scale(calc(100vh / 863));
     }
 }
 
-@media (max-height: 800px) {
+/* Combined constraints - use smallest dimension */
+@media (max-width: 1600px) and (max-height: 900px) {
     #screen-container {
-        transform: scale(0.8);
-    }
-}
-
-@media (max-height: 700px) {
-    #screen-container {
-        transform: scale(0.7);
-    }
-}
-
-@media (max-height: 600px) {
-    #screen-container {
-        transform: scale(0.6);
-    }
-}
-
-@media (max-height: 500px) {
-    #screen-container {
-        transform: scale(0.5);
+        transform: scale(min(calc(100vw / 1512), calc(100vh / 863)));
     }
 }
